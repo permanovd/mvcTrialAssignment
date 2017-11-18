@@ -3,7 +3,7 @@
 namespace core\Bootstrap;
 
 use core\Application\Application;
-use core\Application\IBootstrapableComponent;
+use core\Application\IBootstrapableIComponent;
 use core\Persistence\PersistenceService;
 use core\Routing\RoutingService;
 
@@ -21,7 +21,7 @@ class BootstrapService
     }
 
     /**
-     * @return IBootstrapableComponent[]
+     * @return IBootstrapableIComponent[]
      */
     private function findComponentsToBootstrap(): array
     {

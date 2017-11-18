@@ -2,7 +2,7 @@
 
 namespace core\Application;
 
-interface IBootstrapableComponent extends Component
+interface IBootstrapableIComponent extends IComponent
 {
     public function bootstrap();
 }

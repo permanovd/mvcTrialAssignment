@@ -3,9 +3,9 @@
 namespace core\Persistence;
 
 
-use core\Application\IBootstrapableComponent;
+use core\Application\IBootstrapableIComponent;
 
-class PersistenceService  implements IBootstrapableComponent
+class PersistenceService  implements IBootstrapableIComponent
 {
 
     public function bootstrap()

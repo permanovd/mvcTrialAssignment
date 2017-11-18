@@ -3,7 +3,7 @@
 namespace core\Application;
 
 
-interface Component
+interface IComponent
 {
 
 }

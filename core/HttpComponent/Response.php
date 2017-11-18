@@ -9,4 +9,8 @@ class Response
     {
         return 'todo. Need to be implemented.';
     }
+
+    public function setData($data)
+    {
+    }
 }

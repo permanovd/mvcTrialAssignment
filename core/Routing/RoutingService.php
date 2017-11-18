@@ -2,9 +2,9 @@
 
 namespace core\Routing;
 
-use core\Application\IBootstrapableComponent;
+use core\Application\IBootstrapableIComponent;
 
-class RoutingService implements IBootstrapableComponent
+class RoutingService implements IBootstrapableIComponent
 {
     /**
      * @property Route[]
