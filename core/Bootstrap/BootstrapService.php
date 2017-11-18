@@ -8,6 +8,7 @@ class BootstrapService
     public function bootstrap($params)
     {
         $components = $this->findComponentsToBootstrap();
+        // Here we gonna bootstrap components in future.
     }
 
     /**
