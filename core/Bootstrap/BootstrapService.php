@@ -2,21 +2,30 @@
 
 namespace core\Bootstrap;
 
+use core\Application\Application;
+use core\Application\IBootstrapableComponent;
+use core\Persistence\PersistenceService;
+use core\Routing\RoutingService;
+
 class BootstrapService
 {
-
-    public function bootstrap($params)
+    public function bootstrap(Application $application)
     {
         $components = $this->findComponentsToBootstrap();
-        // Here we gonna bootstrap components in future.
+        // Bootstrap and then put every component into app object, so it can be accessed globally.
+        // It will be very heavy object, but we dont have time for better solution.
+        foreach ($components as $componentShortcut => $component) {
+            $component->bootstrap();
+            $application->addComponent($componentShortcut, $component);
+        }
     }
 
     /**
-     * @return string[]
+     * @return IBootstrapableComponent[]
      */
     private function findComponentsToBootstrap(): array
     {
         // Todo implement component contract.
-        return [];
+        return [new RoutingService(), new PersistenceService()];
     }
 }

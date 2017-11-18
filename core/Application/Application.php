@@ -2,16 +2,16 @@
 
 namespace core\Application;
 
+use core\Bootstrap\BootstrapService;
 use core\HttpComponent\Request;
 use core\HttpComponent\Response;
 
-//use core\HttpComponent\Response;
-
-//use core\HttpComponent\Response;
-
-
 class Application
 {
+    /**
+     * @param $components array
+     */
+    protected $components;
 
     public function __construct()
     {
@@ -24,6 +24,10 @@ class Application
      */
     public function processRequest(Request $request)
     {
+        // todo refactor to factory.
+        $bootstrapService = new BootstrapService();
+        $bootstrapService->bootstrap($this);
+
         // todo implement
         return new Response();
     }
@@ -32,5 +36,10 @@ class Application
     {
         // @todo implement
         print $response;
+    }
+
+    public function addComponent($componentShortcut, $component)
+    {
+        $this->components[$componentShortcut] = $component;
     }
 }
