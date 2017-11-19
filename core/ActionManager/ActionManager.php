@@ -18,8 +18,17 @@ class ActionManager
     {
         $methodName = $route->getMethodName();
         $path = explode(':', $methodName);
-        $controllerName = 'core\\Controllers\\' . $path[0];
-        $actionName = $path[1] . 'Action';
+        $namespace = $path[0];
+        $controllerName = $path[1] . 'Controller';
+        $actionName = $path[2] . 'Action';
+
+        if ($namespace !== 'core') {
+            // Got config from module.
+            $namespace = 'modules\\' . $namespace;
+            $controllerName = 'Controllers\\' . $controllerName;
+        }
+
+        $controllerName = $namespace . '\\' . $controllerName;
 
         if (!class_exists($controllerName)) {
             return new NotFoundAction($request, '', '');

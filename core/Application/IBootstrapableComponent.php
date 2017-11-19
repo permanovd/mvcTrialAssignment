@@ -4,5 +4,5 @@ namespace core\Application;
 
 interface IBootstrapableComponent extends IComponent
 {
-    public function bootstrap();
+    public function bootstrap(Application $application);
 }

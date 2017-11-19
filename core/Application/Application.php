@@ -11,16 +11,22 @@ use core\Routing\RoutingService;
 
 class Application
 {
+
+    private static $instance;
+
+    public static function getInstance(): Application
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
     /**
      * @param $components array
      */
     protected $components;
     protected $request;
-
-    public function __construct()
-    {
-
-    }
 
     /**
      * @param Request $request

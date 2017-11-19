@@ -2,8 +2,10 @@
 
 namespace core\Routing;
 
+use core\Application\Application;
 use core\Application\IBootstrapableComponent;
 use core\HttpComponent\Request;
+use core\Module\ModuleManagementService;
 use InvalidArgumentException;
 
 class RoutingService implements IBootstrapableComponent
@@ -22,28 +24,20 @@ class RoutingService implements IBootstrapableComponent
     }
 
     /**
-     * @return RoutingService
+     * @param Application $application
      */
-    public function bootstrap()
+    public function bootstrap(Application $application)
     {
-        // TODO: Implement bootstrap() method.
-        $filePaths = $this->getConfigurationFilePaths();
+        /** @var ModuleManagementService $moduleComponent */
+        $moduleComponent = $application->getComponent('module');
+        $filePaths = $moduleComponent->getDeclaredParameterFromAll('route_path');
+        $filePaths[] = APP_DIR . '/appdata/routes.php';
         $routingService = $this;
         foreach ($filePaths as $filePath) {
             // todo here goes validation of route file.
             // or some other more elegant ways to do that.
             require_once $filePath;
         }
-        return $routingService;
-    }
-
-    /**
-     * @return string[]
-     */
-    protected function getConfigurationFilePaths(): array
-    {
-        // todo implement route collecting logic. We've got to collect routes from components/modules.
-        return [APP_DIR . '/appdata/routes.php'];
     }
 
     /**
