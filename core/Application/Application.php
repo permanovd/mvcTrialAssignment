@@ -55,7 +55,7 @@ class Application
 
     public function terminate(Request $request, Response $response)
     {
-        // @todo implement
+        // @todo implement header outputting and proper rendering of response.
         print $response;
     }
 
