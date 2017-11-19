@@ -29,21 +29,43 @@ class Action
      * @var string
      */
     private $functionName;
+    /**
+     * @var array
+     */
+    private $params;
 
-    public function __construct(Request $request, string $controllerName = '', string $functionName = '')
-    {
+    public function __construct(
+        Request $request,
+        string $controllerName = '',
+        string $functionName = '',
+        array $params = array()
+    ) {
         $this->request = $request;
         $this->controllerName = $controllerName;
         $this->functionName = $functionName;
+        $this->params = $params;
     }
 
     public function execute(): Response
     {
+        $hasParams = false;
         $controller = new $this->controllerName($this->request);
         $actionFuncName = $this->functionName;
         $response = new Response('');
+
+        if (!empty($this->params)) {
+            $hasParams = true;
+        }
+
         try {
-            $response = $controller->{$actionFuncName}();
+            if (!$hasParams) {
+                $response = $controller->{$actionFuncName}();
+            } else {
+                $params = array_values($this->params);
+                $response = \call_user_func_array(array($controller, $actionFuncName), $params);
+            }
+
+
         } catch (Exception $exception) {
             // todo implement.
             $response->setData('Error: ' . $exception->getMessage());

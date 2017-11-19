@@ -20,6 +20,11 @@ class RoutingService implements IBootstrapableComponent
     public function register(Route $route)
     {
         // todo add route validation.
+
+        if (strpos($route->getPath(), '{') !== false) {
+            $route = new DynamicRoute($route->getPath(), $route->getMethodName());
+        }
+
         $this->routeCollection[] = $route;
     }
 
@@ -75,9 +80,6 @@ class RoutingService implements IBootstrapableComponent
 
     private function matchRoute(Route $route, Request $request)
     {
-        if ($route->getPath() === $request->getUri()) {
-            return true;
-        }
-        return false;
+        return $route->pathMatch($request->getUri());
     }
 }

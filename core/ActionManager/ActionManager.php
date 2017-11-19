@@ -38,6 +38,6 @@ class ActionManager
             return new NotFoundAction($request, $controllerName, '');
         }
 
-        return new Action($request, $controllerName, $actionName);
+        return new Action($request, $controllerName, $actionName, $route->getParams($request->getUri()));
     }
 }

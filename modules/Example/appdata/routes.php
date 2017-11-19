@@ -12,3 +12,9 @@ $routingService->register(
         'example/index',
         'Example:Example:index')
 );
+
+$routingService->register(
+    new \core\Routing\Route(
+        'example/{id}/view',
+        'Example:Example:view')
+);

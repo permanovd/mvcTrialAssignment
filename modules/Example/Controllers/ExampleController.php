@@ -16,4 +16,10 @@ class ExampleController extends BaseController
     {
         return $this->renderView('Example:example:home', ['pageTitle' => 'Wow, index page.']);
     }
+
+    public function viewAction($id): Response
+    {
+
+        return $this->renderView('Example:example:view', ['pageTitle' => 'Wow, view page id is ' . $id . '.']);
+    }
 }

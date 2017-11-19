@@ -1,0 +1,1 @@
+<div><?php print $pageTitle ?></div>
