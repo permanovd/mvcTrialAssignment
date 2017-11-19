@@ -7,6 +7,7 @@ use core\Application\IBootstrapableComponent;
 use core\Module\ModuleManagementService;
 use core\Persistence\PersistenceService;
 use core\Routing\RoutingService;
+use core\Views\ViewsManagementService;
 
 class BootstrapService
 {
@@ -30,7 +31,8 @@ class BootstrapService
         return [
             new ModuleManagementService(),
             new RoutingService(),
-            new PersistenceService()
+            new PersistenceService(),
+            new ViewsManagementService()
         ];
     }
 }

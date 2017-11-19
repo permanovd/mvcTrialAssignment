@@ -9,11 +9,11 @@ class ExampleController extends BaseController
 {
     public function homeAction(): Response
     {
-        return new Response('Some new framework welcomes you.');
+        return $this->renderView('Example:example:home', ['pageTitle' => 'Some new framework welcomes you.']);
     }
 
     public function indexAction(): Response
     {
-        return new Response('Wow, index page.');
+        return $this->renderView('Example:example:home', ['pageTitle' => 'Wow, index page.']);
     }
 }
