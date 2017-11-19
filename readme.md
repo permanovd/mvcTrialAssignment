@@ -6,7 +6,13 @@ Consists of some core components and can be extended by modules.
 There is Example module in modules/Example directory, so you can understand
 contracts and principles.
 
-What is done?
+### How to use
+
+Define your module in modules catalog. Then you've got to have
+*appdata* catalog to place route information and *config* catalog to define
+configuration. Everything else can be found in Example module (modules/Example).
+
+#### What is done?
 
 * Routing (with dynamic parameters)
 * Controllers
@@ -17,7 +23,7 @@ What is done?
 * Modularity (only a scratch actually, but can be implemented properly)
 * Request/Response system.
 
-What has to be done?
+#### What has to be done?
 
 * Middleware (authorization, rbac and so on)
 * Post data and forms
@@ -27,3 +33,4 @@ What has to be done?
 * Proper configuration system
 * Views template inheritance
 * Request/Response headers getting/setting
+
