@@ -2,9 +2,10 @@
 
 namespace core\Routing;
 
-use core\Application\IBootstrapableIComponent;
+use core\Application\IBootstrapableComponent;
+use core\HttpComponent\Request;
 
-class RoutingService implements IBootstrapableIComponent
+class RoutingService implements IBootstrapableComponent
 {
     /**
      * @property Route[]
@@ -50,5 +51,16 @@ class RoutingService implements IBootstrapableIComponent
     public function getRouteCollection()
     {
         return $this->routeCollection;
+    }
+
+    public function getName(): string
+    {
+        return 'routing';
+    }
+
+    public function getCurrentRoute(Request $request)
+    {
+        // Too much of responsibility for this class. Need to be refactored.
+        return reset($this->routeCollection);
     }
 }

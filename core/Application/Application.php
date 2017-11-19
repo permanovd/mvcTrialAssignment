@@ -6,6 +6,8 @@ use core\ActionManager\ActionManager;
 use core\Bootstrap\BootstrapService;
 use core\HttpComponent\Request;
 use core\HttpComponent\Response;
+use core\Routing\Route;
+use core\Routing\RoutingService;
 
 class Application
 {
@@ -13,7 +15,7 @@ class Application
      * @param $components array
      */
     protected $components;
-    protected $response;
+    protected $request;
 
     public function __construct()
     {
@@ -26,23 +28,23 @@ class Application
      */
     public function processRequest(Request $request)
     {
-        $response = new Response();
-        $this->response = $response;
+        $this->request = $request;
         // todo refactor to factory.
         $bootstrapService = new BootstrapService();
         $bootstrapService->bootstrap($this);
 
+        /** @var RoutingService $routingComponent */
+        $routingComponent = $this->getComponent('routing');
+        /** @var Route $currentRoute */
+        $currentRoute = $routingComponent->getCurrentRoute($request);
+
         $actionManager = new ActionManager();
-        $action = $actionManager->locateAction();
+        $action = $actionManager->buildAction($currentRoute, $this->request);
 
         // Here goes pre/post-process and middleware.
         // todo implement.
 
-        $data = $action->execute();
-        $this->response->setData($data);
-
-        // todo implement
-        return $this->response;
+        return $action->execute();
     }
 
     public function terminate(Request $request, Response $response)
@@ -51,8 +53,13 @@ class Application
         print $response;
     }
 
-    public function addComponent($componentShortcut, $component)
+    public function addComponent(IComponent $component)
     {
-        $this->components[$componentShortcut] = $component;
+        $this->components[$component->getName()] = $component;
+    }
+
+    public function getComponent($componentName)
+    {
+        return $this->components[$componentName];
     }
 }

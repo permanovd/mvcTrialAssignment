@@ -3,7 +3,7 @@
 namespace core\Bootstrap;
 
 use core\Application\Application;
-use core\Application\IBootstrapableIComponent;
+use core\Application\IBootstrapableComponent;
 use core\Persistence\PersistenceService;
 use core\Routing\RoutingService;
 
@@ -16,12 +16,12 @@ class BootstrapService
         // It will be very heavy object, but we dont have time for better solution.
         foreach ($components as $componentShortcut => $component) {
             $component->bootstrap();
-            $application->addComponent($componentShortcut, $component);
+            $application->addComponent($component);
         }
     }
 
     /**
-     * @return IBootstrapableIComponent[]
+     * @return IBootstrapableComponent[]
      */
     private function findComponentsToBootstrap(): array
     {

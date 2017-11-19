@@ -9,7 +9,7 @@ class Route
     private $path;
     private $methodName;
 
-    public function __construct($path, $methodName, $params)
+    public function __construct($path, $methodName, array $params = [])
     {
         // todo implement logic
         $this->path = $path;

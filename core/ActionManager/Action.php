@@ -8,12 +8,45 @@
 
 namespace core\ActionManager;
 
+use core\HttpComponent\Request;
+use core\HttpComponent\Response;
 
 class Action
 {
 
-    public function execute() : string
+    protected $actionSuffix = 'Action';
+
+    /**
+     * @var Request
+     */
+    private $request;
+    /**
+     * @var string
+     */
+    private $controllerName;
+    /**
+     * @var string
+     */
+    private $functionName;
+
+    public function __construct(Request $request, string $controllerName = '', string $functionName = '')
     {
-        return '';
+        $this->request = $request;
+        $this->controllerName = $controllerName;
+        $this->functionName = $functionName;
+    }
+
+    public function execute(): Response
+    {
+        $controller = new $this->controllerName($this->request);
+        $actionFuncName = $this->functionName . $this->actionSuffix;
+        $response = new Response();
+        try {
+            $response = $controller->{$actionFuncName}();
+
+        } catch (Exception $exception) {
+            // todo implement.
+        }
+        return $response;
     }
 }

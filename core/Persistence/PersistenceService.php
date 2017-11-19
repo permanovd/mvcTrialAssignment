@@ -3,13 +3,18 @@
 namespace core\Persistence;
 
 
-use core\Application\IBootstrapableIComponent;
+use core\Application\IBootstrapableComponent;
 
-class PersistenceService  implements IBootstrapableIComponent
+class PersistenceService  implements IBootstrapableComponent
 {
 
     public function bootstrap()
     {
         // TODO: Implement bootstrap() method.
+    }
+
+    public function getName(): string
+    {
+        return 'persistence';
     }
 }

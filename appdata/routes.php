@@ -4,4 +4,3 @@
 $routingService->register(
     new \core\Routing\Route('hello', 'BaseController')
 );
-//return "kek";
