@@ -36,7 +36,7 @@ class Application
         /** @var RoutingService $routingComponent */
         $routingComponent = $this->getComponent('routing');
         /** @var Route $currentRoute */
-        $currentRoute = $routingComponent->getCurrentRoute($request);
+        $currentRoute = $routingComponent->getRequestedRoute($request);
 
         $actionManager = new ActionManager();
         $action = $actionManager->buildAction($currentRoute, $this->request);

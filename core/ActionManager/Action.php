@@ -10,6 +10,7 @@ namespace core\ActionManager;
 
 use core\HttpComponent\Request;
 use core\HttpComponent\Response;
+use Exception;
 
 class Action
 {
@@ -39,13 +40,13 @@ class Action
     public function execute(): Response
     {
         $controller = new $this->controllerName($this->request);
-        $actionFuncName = $this->functionName . $this->actionSuffix;
-        $response = new Response();
+        $actionFuncName = $this->functionName;
+        $response = new Response('');
         try {
             $response = $controller->{$actionFuncName}();
-
         } catch (Exception $exception) {
             // todo implement.
+            $response->setData('Error: ' . $exception->getMessage());
         }
         return $response;
     }

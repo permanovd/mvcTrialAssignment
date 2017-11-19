@@ -2,5 +2,7 @@
 
 /** @var \core\Routing\RoutingService $routingService */
 $routingService->register(
-    new \core\Routing\Route('hello', 'BaseController')
+    new \core\Routing\Route(
+        '',
+        'BaseController:home')
 );

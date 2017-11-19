@@ -18,8 +18,8 @@ class ActionManager
     {
         $methodName = $route->getMethodName();
         $path = explode(':', $methodName);
-        $controllerName = $path[0];
-        $actionName = $path[1];
+        $controllerName = 'core\\Controllers\\' . $path[0];
+        $actionName = $path[1] . 'Action';
 
         if (!class_exists($controllerName)) {
             return new NotFoundAction($request, '', '');

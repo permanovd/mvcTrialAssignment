@@ -24,4 +24,12 @@ class Route
         return $this->methodName;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
 }
