@@ -1,4 +1,4 @@
-### Loftschool test trial assignment
+### Test trial assignment
 
 Another Mvc framework.
 
